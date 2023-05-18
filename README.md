@@ -39,9 +39,12 @@ Sigue los siguientes pasos para ejecutar el proyecto:
      source venv/bin/activate
      ```
 4. Instala las dependencias del proyecto ejecutando el siguiente comando en la ruta raíz del proyecto:
-- pip install -r requirements.txt
+   ```pip install -r requirements.txt
+   ```
 5. Crea la base de datos utilizando el archivo `bancodb_.txt` y establece los parámetros de conexión en el archivo `app.py`.
 6. Después de instalar las dependencias y configurar la base de datos, ejecuta la aplicación con el siguiente comando:
-  - python app.py
+   ```
+   python app.py
+     ```
 
 
