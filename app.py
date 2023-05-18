@@ -12,8 +12,6 @@ db = mysql.connector.connect(
     database="BancoDB"
 )
 
-# Ruta para el formulario de transacciones
-
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -41,9 +39,24 @@ def home():
 
 @app.route("/registro", methods=["POST"])
 def registro():
+    if "titular" not in request.form:
+        mensaje = "Por favor, ingrese el titular de la cuenta."
+        return render_template("index.html", mensaje=mensaje)
+
     titular = request.form["titular"]
+
+    if "tipo_cuenta" not in request.form:
+        mensaje = "Por favor, seleccione el tipo de cuenta."
+        return render_template("index.html", mensaje=mensaje)
+
     tipo_cuenta = request.form["tipo_cuenta"]
+
+    if "saldo" not in request.form:
+        mensaje = "Por favor, ingrese el saldo de la cuenta."
+        return render_template("index.html", mensaje=mensaje)
+
     saldo = request.form["saldo"]
+
     cursor = db.cursor()
 
     # Generar un numero de cuenta al azar de 10 dígitos
@@ -61,7 +74,7 @@ def registro():
 
 
 def generar_numero_cuenta(cursor):
-    # Generar un numero de cuenta al azar de 10 dígitos que no exista en la base de datos
+    # Generar un numero de cuenta al azar de 10 digitos que no exista en la base de datos al crear el usuario
     while True:
         numero_cuenta = ''.join(random.choices("0123456789", k=10))
         cursor.execute(
@@ -70,6 +83,8 @@ def generar_numero_cuenta(cursor):
         if cuenta_existe == 0:
             break
     return numero_cuenta
+
+# Ruta para el formulario de transacciones
 
 
 @app.route("/transacciones", methods=["GET", "POST"])

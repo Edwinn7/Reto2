@@ -14,10 +14,10 @@ body {
 	width: 350px;
 	height: 500px;
 	overflow: hidden;
-	background: url("https://play-lh.googleusercontent.com/6-4ZzKvuZAMdLRzoWDwIizvg4wHZNRY_r4AWb3CXyT5kj0nTO4HiSA861uOZ9_QWH8iC") no-repeat center/cover;
+	background: url("https://www.bancolombia.com/wcm/connect/www.bancolombia.com-26918/e9eca8cb-99dc-4516-992c-7d9808d24b25/foto_estatica.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_K9HC1202P864E0Q30449MS3000-e9eca8cb-99dc-4516-992c-7d9808d24b25-n.hqtnl") no-repeat center/cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
-	background-color: #2c2a29;
+	background-color: #ffffff;
 }
 
 #chk {
@@ -74,7 +74,7 @@ select {
 	display: flex;
 	margin: 20px auto;
 	padding: 10px;
-	border: 2px solid #ced4da;
+	border: 2px solid #2c2a29;
 	outline: none;
 	border-radius: 5px;
 }
@@ -89,11 +89,11 @@ input {
 	padding: 10px;
 	outline: none;
 	border-radius: 5px;
-	border: 2px solid #ced4da
+	border: 2px solid #2c2a29
 }
 input:focus{
 	outline: none;
-	border: 2px solid #ff7f41;  
+	border: 2px solid #00ceee;  
 }
 
 button {
