@@ -6,8 +6,8 @@ body {
 	align-items: center;
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
-	background-color: #fff;
-	
+	background-color: #2c2a29;
+
 }
 
 .main {
@@ -30,6 +30,31 @@ body {
 	height: 100%;
 }
 
+#titulo {
+	color: #9063cd;
+	text-shadow: #2c2a29;
+}
+
+#alert {
+	background-color: #ff7f41;
+	color: #2c2a29;
+}
+
+@keyframes hideElement {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		display: none;
+	}
+}
+
+#alert {
+	animation: hideElement 0.3s ease-in-out 5s forwards;
+}
+
 label {
 	color: #2c2a29;
 	font-size: 2.3em;
@@ -44,12 +69,12 @@ label {
 select {
 	width: 60%;
 	height: 20px;
-	background: #e0dede;
+	background: #ffffff;
 	justify-content: center;
 	display: flex;
 	margin: 20px auto;
 	padding: 10px;
-	border: none;
+	border: 2px solid #ced4da;
 	outline: none;
 	border-radius: 5px;
 }
@@ -57,14 +82,18 @@ select {
 input {
 	width: 60%;
 	height: 20px;
-	background: #fff;
+	background: #ffffff;
 	justify-content: center;
 	display: flex;
 	margin: 20px auto;
 	padding: 10px;
-	border: none;
 	outline: none;
 	border-radius: 5px;
+	border: 2px solid #ced4da
+}
+input:focus{
+	outline: none;
+	border: 2px solid #ff7f41;  
 }
 
 button {

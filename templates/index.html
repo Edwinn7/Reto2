@@ -14,10 +14,9 @@
 <body>
     <div class="main">
         <input type="checkbox" id="chk" aria-hidden="true">
-
         <div class="signup">
             <form method="POST" action="/registro">
-                <label for="chk" aria-hidden="true">Bienvenid@</label>
+                <label for="chk" aria-hidden="true" id="titulo">Bienvenid@</label>
                 <input type="text" name="titular" placeholder="Titular" required>
                 <select name="tipo_cuenta" required>
                     <option disabled selected>Seleccione el tipo de cuenta</option>
@@ -28,21 +27,12 @@
                 <input type="number" name="saldo" placeholder="Saldo">
                 <button type="submit" value="Ingresar">Crear cuenta</button>
                 {% if mensaje %}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger" role="alert" id="alert">
                     {{ mensaje }}
                 </div>
                 {% endif %}
             </form>
         </div>
-        <script>
-            const tipoCuentaSelect = document.getElementById('tipo_cuenta');
-
-            tipoCuentaSelect.addEventListener('change', function () {
-                const selectedOption = this.options[this.selectedIndex];
-                selectedOption.disabled = true;
-                selectedOption.selected = false;
-            });
-        </script>
 
         <div class="login">
             <form method="POST" action="/">
@@ -50,7 +40,7 @@
                 <input type="text" placeholder="Número de Cuenta:" name="numero_cuenta" id="numero_cuenta" required>
                 <button type="submit" value="Ingresar">Ingresar</button>
                 {% if mensaje %}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger" role="alert" id="alert">
                     {{ mensaje }}
                 </div>
                 {% endif %}
