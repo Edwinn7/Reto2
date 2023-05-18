@@ -1,0 +1,39 @@
+CREATE DATABASE BancoDB;
+
+USE BancoDB;
+
+-- Tabla Tipo_Transaccion
+CREATE TABLE Tipo_Transaccion (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    descripcion VARCHAR(100)
+);
+
+-- Tabla Cuentas
+CREATE TABLE Cuentas (
+    numero_cuenta VARCHAR(20) PRIMARY KEY,
+    tipo_cuenta VARCHAR(50),
+    saldo DECIMAL(10, 2),
+    titular VARCHAR(100)
+);
+
+-- Tabla Movimientos
+CREATE TABLE Movimientos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    valor DECIMAL(10, 2),
+    numero_cuenta VARCHAR(20),
+    cuenta_origen VARCHAR(20),
+    fecha DATE,
+    tipo_transaccion_id INT,
+    FOREIGN KEY (tipo_transaccion_id) REFERENCES Tipo_Transaccion(id)
+);
+
+----------------------------------------------------------
+
+añadir cuentas para testear
+-- Insertar cuenta test1
+INSERT INTO Cuentas (numero_cuenta, tipo_cuenta, saldo, titular)
+VALUES ('1234567890', 'Cuenta corriente', 90.00, 'test1');
+
+-- Insertar cuenta test2
+INSERT INTO Cuentas (numero_cuenta, tipo_cuenta, saldo, titular)
+VALUES ('0987654321', 'Cuenta de ahorros', 10.00, 'test2');
