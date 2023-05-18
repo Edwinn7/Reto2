@@ -31,8 +31,9 @@ body {
 }
 
 #titulo {
-	color: #9063cd;
+	color: #2c2a29;
 	text-shadow: #2c2a29;
+	margin-bottom: auto;
 }
 
 #alert {

@@ -39,25 +39,15 @@ def home():
 
 @app.route("/registro", methods=["POST"])
 def registro():
-    if "titular" not in request.form:
-        mensaje = "Por favor, ingrese el titular de la cuenta."
-        return render_template("index.html", mensaje=mensaje)
-
     titular = request.form["titular"]
-
-    if "tipo_cuenta" not in request.form:
-        mensaje = "Por favor, seleccione el tipo de cuenta."
-        return render_template("index.html", mensaje=mensaje)
-
-    tipo_cuenta = request.form["tipo_cuenta"]
-
-    if "saldo" not in request.form:
-        mensaje = "Por favor, ingrese el saldo de la cuenta."
-        return render_template("index.html", mensaje=mensaje)
-
+    tipo_cuenta = request.form.get("tipo_cuenta")
     saldo = request.form["saldo"]
-
     cursor = db.cursor()
+
+    # Verificar si el campo "tipo_cuenta" está presente
+    if tipo_cuenta is None:
+        mensaje = "Error: Tipo de cuenta no especificado."
+        return render_template("index.html", mensaje=mensaje)
 
     # Generar un numero de cuenta al azar de 10 dígitos
     numero_cuenta = generar_numero_cuenta(cursor)
@@ -70,7 +60,7 @@ def registro():
     cursor.close()
 
     mensaje = "Cuenta creada con éxito."
-    return render_template("index.html", mensaje=mensaje)
+    return redirect(url_for("transacciones", cuenta_origen=numero_cuenta))
 
 
 def generar_numero_cuenta(cursor):
@@ -93,8 +83,12 @@ def transacciones():
         cuenta_destino = request.form["cuenta_destino"]
         cuenta_origen = request.form["cuenta_origen"]
         valor = float(request.form["valor"])
-
+        tipo_transaccion = request.form.get("tipo_transaccion")
         cursor = db.cursor()
+
+        if tipo_transaccion is None:
+            mensaje = "Error: Tipo de transacción no especificado."
+            return render_template("transacciones.html", mensaje=mensaje)
 
         # Obtener saldo de la cuenta origen
         cursor.execute(
@@ -109,14 +103,28 @@ def transacciones():
             saldo_origen = saldo_origen[0]
 
         if saldo_origen >= valor:
+            # Buscar la transacción en la tabla Tipo_Transaccion
+            cursor.execute(
+                "SELECT id FROM Tipo_Transaccion WHERE descripcion = %s", (tipo_transaccion,))
+            tipo_transaccion_id = cursor.fetchone()
+
+            if tipo_transaccion_id is None:
+                # Si no existe, insertarla en la tabla Tipo_Transaccion
+                cursor.execute(
+                    "INSERT INTO Tipo_Transaccion (descripcion) VALUES (%s)", (tipo_transaccion,))
+                db.commit()
+                tipo_transaccion_id = cursor.lastrowid
+            else:
+                tipo_transaccion_id = tipo_transaccion_id[0]
+
             # Realizar transaccion
             cursor.execute(
                 "UPDATE Cuentas SET saldo = saldo - %s WHERE numero_cuenta = %s", (valor, cuenta_origen))
             cursor.execute(
                 "UPDATE Cuentas SET saldo = saldo + %s WHERE numero_cuenta = %s", (valor, cuenta_destino))
 
-            cursor.execute("INSERT INTO Movimientos (valor, numero_cuenta, cuenta_origen, fecha, tipo_transaccion) VALUES (%s, %s, %s, NOW(), 'Transferencia')",
-                           (valor, cuenta_destino, cuenta_origen))
+            cursor.execute("INSERT INTO Movimientos (valor, numero_cuenta, cuenta_origen, fecha, tipo_transaccion_id) VALUES (%s, %s, %s, NOW(), %s)",
+                           (valor, cuenta_destino, cuenta_origen, tipo_transaccion_id))
 
             db.commit()
             mensaje = "Transacción realizada con éxito."

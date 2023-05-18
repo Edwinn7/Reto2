@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cuenta</title>
+    <link rel="shortcut icon"
+        href="https://www.bancolombia.com/wcm/connect/www.bancolombia.com-26918/7ad290cb-fb42-4187-ad12-a54eebb3acf5/il-pre-approved-credit-online.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_K9HC1202P86O40QTNS9EAE1S47-7ad290cb-fb42-4187-ad12-a54eebb3acf5-nM8M7Sg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
         rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -34,6 +36,15 @@
                 <input type="number" class="form-control item" name="cuenta_destino" id="cuenta_destino"
                     placeholder="Cuenta de destino" required>
             </div>
+            <div class="form-group">
+                <select class="form-control" name="tipo_transaccion" id="tipo_transaccion" required>
+                    <option disabled selected>Seleccione el tipo de transacción</option>
+                    <option value="Transferencia">Transferencia</option>
+                    <option value="Transferencia interbancaria">Transferencias interbancarias</option>
+                    <option value="Pago">Pago</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <input type="number" class="form-control item" name="valor" id="valor" placeholder="Valor" required>
             </div>

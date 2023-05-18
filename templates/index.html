@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://www.bancolombia.com/wcm/connect/www.bancolombia.com-26918/7ad290cb-fb42-4187-ad12-a54eebb3acf5/il-pre-approved-credit-online.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_K9HC1202P86O40QTNS9EAE1S47-7ad290cb-fb42-4187-ad12-a54eebb3acf5-nM8M7Sg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/indexStyle.css') }}">
@@ -15,10 +16,10 @@
     <div class="main">
         <input type="checkbox" id="chk" aria-hidden="true">
         <div class="signup">
-            <form method="POST" action="/registro">
+            <form method="POST" action="{{ url_for('registro') }}">
                 <label for="chk" aria-hidden="true" id="titulo">Bienvenid@</label>
                 <input type="text" name="titular" placeholder="Titular" required>
-                <select name="tipo_cuenta" required>
+                <select name="tipo_cuenta" id="tipo_cuenta" required>
                     <option disabled selected>Seleccione el tipo de cuenta</option>
                     <option value="Cuenta Corriente">Cuenta Corriente</option>
                     <option value="Cuenta De Ahorros">Cuenta De Ahorros</option>
