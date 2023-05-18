@@ -47,6 +47,3 @@ Sigue los siguientes pasos para ejecutar el proyecto:
    ```
    python app.py
      ```
-
-![iniciar proyecto](https://drive.google.com/file/d/1Ybqap0FoC4JteSeg8tCoeUu9cjJJi-T-/view)
-
